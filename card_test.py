@@ -12,7 +12,7 @@ def test_color_sign():
 
 
 def test_figure_kind():
-    assert card.get_figure_name() == 'A'
+    assert card.get_figure_kind() == 'A'
 
 
 def test_figure_value():
