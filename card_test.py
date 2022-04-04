@@ -11,7 +11,7 @@ def test_color_sign():
     assert card.get_color_sign() == '♣'
 
 
-def test_figure_sign():
+def test_figure_kind():
     assert card.get_figure_name() == 'A'
 
 
