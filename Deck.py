@@ -4,7 +4,7 @@
         list: shuffle deck
     """
 from random import shuffle
-from Card import Card
+from card import Card
 
 
 class Deck:

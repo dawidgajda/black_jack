@@ -6,7 +6,7 @@
 
 
 class Card:
-    """Class Card with color and figure"""
+    """Class Card with color (name, sign) and figure (kind, value)"""
 
     def __init__(self, color, figure) -> None:
         self.color = color

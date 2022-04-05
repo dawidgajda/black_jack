@@ -1,4 +1,4 @@
-from Card import Card
+from card import Card
 
 card = Card({'CLUBS': '♣'}, {'A': 10})
 
