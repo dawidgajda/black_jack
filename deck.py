@@ -19,16 +19,27 @@ class Deck:
 
         self.deck = []
 
-    def deck_generator(self):
+    def generator(self):
         """Method to generate deck with all card"""
+
         for color in self.colors:
             for figure in self.figures:
-                self.deck.append(Card(color, figure))
+                temp_list = []
+                temp_list.append(Card(color, figure))
+                self.deck.append(temp_list)
 
-    def deck_shuffle(self):
+    def shuffle(self):
         """Method to shuffle deck
 
         Returns:
             list: card objects instance
         """
         return shuffle(self.deck)
+
+    def get_card(self):
+        """Method to get and remove one card in deck
+
+        Returns:
+            list: One object card
+        """
+        return self.deck.pop(-1)
