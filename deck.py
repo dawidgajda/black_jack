@@ -40,6 +40,7 @@ class Deck:
         """Method to get and remove one card in deck
 
         Returns:
-            list: One object card
+            Object: One object card
         """
-        return self.deck.pop(-1)
+        card = self.deck.pop(-1)
+        return card[0]
