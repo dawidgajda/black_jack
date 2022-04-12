@@ -1,8 +1,15 @@
+"""Module game
+
+    Returns:
+        str: who win
+    """
 from deck import Deck
 from player import Player
 
 
 class Game():
+    """Class Game"""
+
     def __init__(self) -> None:
         self.deck = Deck()
         self.deck.generator()
@@ -16,6 +23,7 @@ class Game():
         self.start()
 
     def start(self):
+        """Start game"""
 
         self.player_draw_cards = self.player.get_two_card()
         self.player_win = self.check_cards('Player', self.player_draw_cards)
@@ -23,6 +31,7 @@ class Game():
         self.next_game()
 
     def next_game(self):
+        """Next game of the turn"""
         next_game = input('Next game? [Y]es or [N]o: ')
         print('----------'*10)
         if next_game.upper() == 'Y':
@@ -38,6 +47,15 @@ class Game():
             self.next_game()
 
     def check_cards(self, who, who_points):
+        """Method to check two first card
+
+        Args:
+            who name: player or croupier
+            who_points list: list with cards
+
+        Returns:
+            int: or win
+        """
         cards = 0
         for card, _ in who_points:
             if card in ['A', 'K', 'Q', 'J']:
@@ -51,12 +69,25 @@ class Game():
         return 0
 
     def scored_points(self, who_points):
+        """Method to sum points in turn
+
+        Args:
+            who_points list: list with cards
+
+        Returns:
+            int: points in turn
+        """
         points = 0
         for _, point in who_points:
             points += point
         return points
 
     def croupier_start(self):
+        """Croupier start
+
+        Returns:
+            int: or win
+        """
         if self.player_win == 0:
             if self.scored_points(self.player_draw_cards) < 21:
                 self.croupier_draw_cards = self.croupier.get_two_card()

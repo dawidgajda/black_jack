@@ -14,6 +14,14 @@ class Player:
         self.draw_cards = []
 
     def card_repr(self, card):
+        """_summary_
+
+        Args:
+            card object: object class Card
+
+        Returns:
+            str: repr card
+        """
         return f'{card.get_figure_kind()} {card.get_color_sign()}'
 
     def get_two_card(self):
@@ -22,10 +30,10 @@ class Player:
         Returns:
             tuple in list: draw cards
         """
-        n = 0
-        while n < 2:
+        num = 0
+        while num < 2:
             self.get_card_to_hand()
-            n += 1
+            num += 1
         return self.draw_cards
 
     def get_card_to_hand(self):
