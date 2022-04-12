@@ -6,42 +6,56 @@ class Player:
 
     def __init__(self, name, deck) -> None:
         self.name = name
-        self.card_point = []
+        self.draw_cards = []
         self.deck = deck
 
-    def clear_point(self):
+    def clear_draw_cards(self):
         """Method to clear list with player points"""
-        self.card_point = []
+        self.draw_cards = []
 
-    def add_card_point(self, card_value):
-        """Method to add player points to list"""
-        self.card_point.append(card_value)
+    def card_repr(self, card):
+        return f'{card.get_figure_kind()} {card.get_color_sign()}'
 
     def get_two_card(self):
         """Method to drawing two cards by player
 
         Returns:
-            int: sum of points with drawn cards
+            tuple in list: draw cards
         """
-        self.get_card_to_hand()
-        self.get_card_to_hand()
-        return self.sum_points_in_game()
+        n = 0
+        while n < 2:
+            self.get_card_to_hand()
+            n += 1
+        return self.draw_cards
 
     def get_card_to_hand(self):
-        """Method to drawing next card"""
+        """Method to drawing next card
+
+        Returns:
+            tuple: draw card - kind adn value
+        """
         card = self.deck.get_card()
-        card_repr = f'{card.get_figure_kind()} {card.get_color_sign()}'
-        print(f'{self.name} draw card {card_repr}')
-        self.add_card_point(card.get_figure_values())
-        print(f'Sum points {self.name} {self.sum_points_in_game()}')
-        if len(self.card_point) >= 2 and self.name != 'Croupier':
-            self.next_card_to_hand()
+        draw_card = (card.get_figure_kind(), card.get_figure_values())
+        self.draw_cards.append(
+            (card.get_figure_kind(), card.get_figure_values()))
+        print(f'{self.name} draw card {self.card_repr(card)}')
+        return draw_card
 
     def next_card_to_hand(self):
-        """question about draw next card"""
+        """Method to draw next card
+
+        Returns:
+            str: who have 21 points
+        """
+        print(f'{self.name} {self.sum_points_in_game()} points')
         next_card = input("Do you have next card? [Y]es or [N]o:")
         if next_card.upper() == 'Y':
             self.get_card_to_hand()
+            if self.sum_points_in_game() > 21:
+                return print(f'{self.name} lost!')
+            elif self.sum_points_in_game() == 21:
+                return print(f'{self.name} win!')
+            self.next_card_to_hand()
         elif next_card.upper() == 'N':
             print('Croupier turn')
         else:
@@ -49,13 +63,12 @@ class Player:
             self.next_card_to_hand()
 
     def sum_points_in_game(self):
-        """Method to return sum of points with drawn cards
+        """_summary_
 
         Returns:
-            int: sum of points with drawn cards
+            int: scored points in game
         """
-        return sum(self.card_point)
-
-    def croupier(self, points):
-        player_points = points
-        self.get_two_card()
+        points_in_game = 0
+        for _, point in self.draw_cards:
+            points_in_game += point
+        return points_in_game
