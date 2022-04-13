@@ -108,6 +108,3 @@ class Game():
                 return 1
             elif self.scored_points(self.croupier_draw_cards) < self.scored_points(self.player_draw_cards):
                 self.croupier.get_card_to_hand()
-
-
-game = Game()
